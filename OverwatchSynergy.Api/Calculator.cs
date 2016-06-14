@@ -67,7 +67,7 @@ namespace OverwatchSynergy.Api
 
         public static IEnumerable<Weight> GetOverallScoresForAllHeroes(IEnumerable<Hero> enemyTeam, IEnumerable<Hero> team, double relativeSynergyWeight = 1)
         {
-            return Heroes.Select(h => GetOverallScore(h, enemyTeam, team, relativeSynergyWeight));
+            return Heroes.Select(h => GetOverallScore(h, enemyTeam, team, relativeSynergyWeight)).SuppressDuplicates(team).OrderByDescending(w => w.Value);
         }
 
         private static Weight GetOverallScore(Hero hero, IEnumerable<Hero> enemyTeam, IEnumerable<Hero> team, double relativeSynergyWeight = 1)
